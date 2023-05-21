@@ -5,7 +5,7 @@ import Header from "./Header";
 
 const theme = createTheme({
     palette: {
-        mode: "dark",
+        mode: "light",
     },
 });
 
