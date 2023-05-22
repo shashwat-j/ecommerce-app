@@ -62,7 +62,7 @@ const StyledLink = styled(Link)(({theme}) => ({
   textDecoration: "none",
 }))
 
-function SearchBar(){
+function SearchBar(props){
 
   const theme = useTheme();
   const products = useSelector((state)=> state.products?.value);
@@ -96,7 +96,7 @@ function SearchBar(){
     }
   }
   return (
-    <Search>
+    <Search sx={{display:{xs:props.xsDisplay, sm:props.smDisplay}}}>
       <Select size="small" onChange={handleCategoryChange} value={selectedCategory} variant="standard" labelId="selected-category" id="selected-category-id" sx={{
         m:1,
         textTransform: "capitalize",
@@ -140,6 +140,7 @@ function SearchBar(){
     </Search>
   )
 }
+
 
 export default function Header() {
 
@@ -197,12 +198,13 @@ export default function Header() {
         }}>
             <Typography variant='h6' color="inherit" sx={{//css in sx will override mui css
               flexGrow:1,//so it takes entire free space available
+              justifyContent:"space-between",
             }}>
               <StyledLink to="/">
                 SlipKart
               </StyledLink>
             </Typography>
-            <SearchBar/>{/*Using function as a component. It is necessary to start func name with capital letter */}
+            <SearchBar xsDisplay="none" smDisplay="flex"/>{/*Using function as a component. It is necessary to start func name with capital letter */}
             <Box flexBasis={500} sx={{ display: "flex", justifyContent: "flex-end"}}>
             <IconButton onClick={navigateToCart} size="large" aria-label="shows cart items count" color="inherit">
               <Badge badgeContent={count} color="error">
@@ -218,6 +220,7 @@ export default function Header() {
             )}
           </Box>
         </Toolbar>
+        <SearchBar xsDisplay="flex" smDisplay="none"/>
     </AppBar>
     {renderMenu}
     </>
